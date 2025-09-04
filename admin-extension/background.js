@@ -79,6 +79,10 @@ function handleUnblockRequest(site, reason) {
 }
 
 function checkIfBlocked(tabId, url) {
+    if (typeof chrome === 'undefined' || !chrome.storage || !chrome.scripting) {
+        return;
+    }
+    
     try {
         const hostname = new URL(url).hostname;
         
@@ -91,6 +95,8 @@ function checkIfBlocked(tabId, url) {
                     target: { tabId: tabId },
                     func: showBlockMessage,
                     args: [hostname]
+                }).catch(() => {
+                    // Ignore injection errors
                 });
             }
         });
