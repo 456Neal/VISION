@@ -6,8 +6,7 @@
   "permissions": [
     "activeTab",
     "storage",
-    "scripting",
-    "desktopCapture"
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -22,12 +21,6 @@
       "css": ["styles.css"],
       "run_at": "document_start",
       "all_frames": true
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["lock-screen.html", "styles.css", "assets/*"],
-      "matches": ["<all_urls>"]
     }
   ],
   "icons": {
