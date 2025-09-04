@@ -10,18 +10,20 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 // Handle messages from content scripts
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'unblockRequest') {
-        // Forward unblock request to admin extension
-        forwardToAdmin(request);
-        sendResponse({ success: true });
-    } else if (request.action === 'getStatus') {
-        chrome.storage.local.get(['isLocked', 'blockedSites'], (result) => {
-            sendResponse(result);
-        });
-        return true;
-    }
-});
+if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.onMessage) {
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        if (request.action === 'unblockRequest') {
+            // Forward unblock request to admin extension
+            forwardToAdmin(request);
+            sendResponse({ success: true });
+        } else if (request.action === 'getStatus') {
+            chrome.storage.local.get(['isLocked', 'blockedSites'], (result) => {
+                sendResponse(result);
+            });
+            return true;
+        }
+    });
+}
 
 // Handle tab updates to check for blocked sites
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
