@@ -206,16 +206,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showNotification(message, type) {
-        // Try to show Chrome notification, fallback to console if not available
-        if (typeof chrome !== 'undefined' && chrome.notifications) {
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: 'icon.png',
-                title: 'VISION Admin',
-                message: message
-            }).catch(() => {
-                console.log(`VISION: ${message}`);
-            });
+        // For extension window, show alert instead of notifications
+        if (window.location.protocol === 'chrome-extension:') {
+            // Create a nice in-window notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : type === 'danger' ? '#dc3545' : type === 'warning' ? '#ffc107' : '#667eea'};
+                color: ${type === 'warning' ? '#212529' : 'white'};
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-weight: 500;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
         } else {
             console.log(`VISION: ${message}`);
         }
