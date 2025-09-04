@@ -1,66 +1,39 @@
 {
   "manifest_version": 3,
-  "name": "VISION - Screen Monitor & Control",
-  "version": "1.0.0",
-  "description": "Advanced screen monitoring and control system for Chromebooks",
-  
+  "name": "Classroom Admin Control",
+  "version": "1.0",
+  "description": "Admin control panel for classroom management",
   "permissions": [
     "activeTab",
     "tabs",
     "storage",
-    "unlimitedStorage",
-    "webNavigation",
-    "webRequest",
-    "declarativeNetRequest",
     "scripting",
-    "desktopCapture",
-    "system.display",
-    "management",
-    "enterprise.deviceAttributes"
+    "notifications",
+    "webNavigation",
+    "background"
   ],
-  
   "host_permissions": [
     "<all_urls>"
   ],
-  
   "background": {
     "service_worker": "background.js"
   },
-  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Classroom Control"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "run_at": "document_start",
-      "all_frames": true
+      "css": ["styles.css"],
+      "run_at": "document_start"
     }
   ],
-  
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "VISION Control Panel"
-  },
-  
   "web_accessible_resources": [
     {
-      "resources": ["blocked.html", "inject.js"],
+      "resources": ["*.html", "*.css", "*.js"],
       "matches": ["<all_urls>"]
     }
-  ],
-  
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "vision_rules",
-        "enabled": true,
-        "path": "rules.json"
-      }
-    ]
-  },
-  
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  }
+  ]
 }
