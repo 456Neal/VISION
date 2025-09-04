@@ -1,1 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISION Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>VISION</h1>
+            <p>Admin Control Panel</p>
+        </header>
 
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="controls">Controls</button>
+            <button class="tab-btn" data-tab="monitoring">Monitoring</button>
+            <button class="tab-btn" data-tab="requests">Requests <span id="requestBadge" class="badge hidden">0</span></button>
+            <button class="tab-btn" data-tab="settings">Settings</button>
+        </div>
+
+        <div id="controls" class="tab-content active">
+            <div class="section">
+                <h3>Screen Control</h3>
+                <div class="button-grid">
+                    <button id="lockAllBtn" class="control-btn danger">🔒 Lock All Screens</button>
+                    <button id="unlockAllBtn" class="control-btn success">🔓 Unlock All Screens</button>
+                    <button id="redirectBtn" class="control-btn warning">🔄 Redirect All</button>
+                    <button id="closeTabsBtn" class="control-btn danger">❌ Close Current Tabs</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Audio Control</h3>
+                <div class="button-grid">
+                    <button id="playSoundBtn" class="control-btn primary">🔊 Play Alert Sound</button>
+                    <button id="muteAllBtn" class="control-btn warning">🔇 Mute All Tabs</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Quick Actions</h3>
+                <div class="input-group">
+                    <input type="url" id="redirectUrl" placeholder="Enter URL to redirect all students...">
+                    <button id="redirectToBtn" class="control-btn primary">Go</button>
+                </div>
+                <div class="input-group">
+                    <input type="url" id="blockSiteUrl" placeholder="Enter URL to block...">
+                    <button id="blockSiteBtn" class="control-btn danger">Block Site</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="monitoring" class="tab-content">
+            <div class="section">
+                <h3>Live Monitoring</h3>
+                <p class="info-text">Screen capture and monitoring features</p>
+                <button id="startMonitoringBtn" class="control-btn primary">📹 Start Live Monitoring</button>
+                <button id="stopMonitoringBtn" class="control-btn danger">⏹️ Stop Monitoring</button>
+            </div>
+            <div class="section">
+                <h3>Connected Students</h3>
+                <div id="studentList" class="student-list">
+                    <p class="info-text">No students connected</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="requests" class="tab-content">
+            <div class="section">
+                <h3>Unblock Requests</h3>
+                <div id="unblockRequests" class="request-list">
+                    <p class="info-text">No pending requests</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings" class="tab-content">
+            <div class="section">
+                <h3>Blocked Sites</h3>
+                <div id="blockedSitesList" class="blocked-sites">
+                    <p class="info-text">No sites blocked</p>
+                </div>
+                <button id="clearBlockedBtn" class="control-btn warning">Clear All Blocks</button>
+            </div>
+            <div class="section">
+                <h3>Extension Settings</h3>
+                <div class="setting-item">
+                    <label for="adminCode">Admin Code:</label>
+                    <input type="text" id="adminCode" placeholder="Set admin code...">
+                    <button id="setAdminCodeBtn" class="control-btn primary">Set</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
