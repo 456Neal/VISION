@@ -206,12 +206,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showNotification(message, type) {
-        chrome.notifications.create({
-            type: 'basic',
-            iconUrl: 'icon48.png',
-            title: 'VISION Admin',
-            message: message
-        });
+        // Try to show Chrome notification, fallback to console if not available
+        if (typeof chrome !== 'undefined' && chrome.notifications) {
+            chrome.notifications.create({
+                type: 'basic',
+                iconUrl: 'icon.png',
+                title: 'VISION Admin',
+                message: message
+            }).catch(() => {
+                console.log(`VISION: ${message}`);
+            });
+        } else {
+            console.log(`VISION: ${message}`);
+        }
     }
 
     // Global functions for onclick handlers
