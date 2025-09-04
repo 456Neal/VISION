@@ -1,16 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Classroom Admin Control",
-  "version": "1.0",
-  "description": "Admin control panel for classroom management",
+  "name": "VISION - Admin Control Panel",
+  "version": "1.0.0",
+  "description": "Keep an eye on your devices and your students - Admin Control Panel",
   "permissions": [
     "activeTab",
     "tabs",
     "storage",
     "scripting",
+    "desktopCapture",
+    "tabCapture",
     "notifications",
-    "webNavigation",
-    "background"
+    "alarms"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -20,20 +21,25 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Classroom Control"
+    "default_title": "VISION Admin Panel"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "css": ["styles.css"],
-      "run_at": "document_start"
+      "run_at": "document_start",
+      "all_frames": true
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["*.html", "*.css", "*.js"],
+      "resources": ["styles.css", "assets/*"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
 }
