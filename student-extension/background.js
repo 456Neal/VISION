@@ -189,14 +189,6 @@ function forwardToAdmin(message) {
             });
             
             chrome.storage.local.set({ unblockRequests: requests });
-            
-            // Show notification
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: 'icon48.png',
-                title: 'VISION - Request Submitted',
-                message: `Unblock request sent for ${message.site}`
-            });
         }
     });
 }
