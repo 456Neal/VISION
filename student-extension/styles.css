@@ -1,6 +1,6 @@
 /* VISION Student Extension Styles */
 
-/* Global styles for lock screen and blocked pages */
+/* Global styles for overlays */
 .vision-overlay {
     position: fixed !important;
     top: 0 !important;
@@ -12,7 +12,7 @@
     box-sizing: border-box !important;
 }
 
-/* Lock screen specific styles */
+/* Lock screen styles */
 #vision-lock-overlay {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     display: flex !important;
@@ -21,7 +21,60 @@
     color: white !important;
 }
 
-/* Blocked site specific styles */
+.vision-lock-container {
+    text-align: center !important;
+    background: rgba(255,255,255,0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    padding: 60px 40px !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    max-width: 500px !important;
+    width: 90% !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+}
+
+.vision-lock-icon {
+    font-size: 72px !important;
+    margin-bottom: 20px !important;
+    animation: pulse 2s infinite !important;
+}
+
+.vision-lock-title {
+    font-size: 48px !important;
+    font-weight: 800 !important;
+    margin-bottom: 10px !important;
+    letter-spacing: 4px !important;
+}
+
+.vision-lock-subtitle {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    margin-bottom: 25px !important;
+    opacity: 0.9 !important;
+}
+
+.vision-lock-message {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    opacity: 0.8 !important;
+    margin-bottom: 40px !important;
+}
+
+.vision-lock-spinner {
+    margin: 30px 0 !important;
+}
+
+.spinner {
+    width: 40px !important;
+    height: 40px !important;
+    border: 4px solid rgba(255,255,255,0.3) !important;
+    border-top: 4px solid white !important;
+    border-radius: 50% !important;
+    animation: spin 1s linear infinite !important;
+    margin: 0 auto !important;
+}
+
+/* Blocked site styles */
 #vision-blocked-overlay {
     background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important;
     display: flex !important;
@@ -30,7 +83,73 @@
     color: white !important;
 }
 
-/* Prevent interaction with underlying content when locked */
+.vision-blocked-container {
+    text-align: center !important;
+    background: rgba(255,255,255,0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    padding: 40px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    max-width: 500px !important;
+    width: 90% !important;
+}
+
+.vision-blocked-icon {
+    font-size: 64px !important;
+    margin-bottom: 20px !important;
+}
+
+.vision-blocked-title {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    margin-bottom: 15px !important;
+}
+
+.vision-blocked-message {
+    font-size: 18px !important;
+    opacity: 0.9 !important;
+    margin-bottom: 30px !important;
+    line-height: 1.5 !important;
+}
+
+.vision-blocked-site {
+    background: rgba(255,255,255,0.2) !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    margin: 20px 0 !important;
+}
+
+.vision-request-btn {
+    background: rgba(255,255,255,0.2) !important;
+    color: white !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    padding: 12px 24px !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.vision-request-btn:hover {
+    background: rgba(255,255,255,0.3) !important;
+    border-color: rgba(255,255,255,0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Prevent interaction with page when locked */
 body.vision-locked {
     overflow: hidden !important;
     pointer-events: none !important;
@@ -42,7 +161,7 @@ body.vision-locked * {
     user-select: none !important;
 }
 
-/* Override any attempts to hide the overlay */
+/* Override attempts to hide overlay */
 #vision-lock-overlay,
 #vision-blocked-overlay {
     display: flex !important;
@@ -50,12 +169,7 @@ body.vision-locked * {
     opacity: 1 !important;
 }
 
-/* Prevent console access */
-body.vision-locked .vision-debug-disable {
-    display: none !important;
-}
-
-/* Anti-tampering styles */
+/* Anti-tampering */
 .vision-protected {
     -webkit-user-select: none !important;
     -moz-user-select: none !important;
