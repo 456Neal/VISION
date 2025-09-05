@@ -19,6 +19,12 @@ window.addEventListener('message', (event) => {
         if (event.data.action === 'status') {
             // Student is reporting their status
             console.log('Student status:', event.data);
+            
+            // Forward status to background script for storage/processing
+            chrome.runtime.sendMessage({
+                action: 'updateStudentStatus',
+                data: event.data
+            });
         }
     }
 });
