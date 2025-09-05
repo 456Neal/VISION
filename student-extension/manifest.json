@@ -1,26 +1,34 @@
 {
-  "manifest_version": 3,
-  "name": "VISION - Student Monitor",
-  "version": "1.0.0",
-  "description": "Keep an eye on your devices and your students - Student Monitor",
-  "permissions": [
-    "activeTab",
-    "storage",
-    "scripting"
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": ["styles.css"],
-      "run_at": "document_start",
-      "all_frames": true
+    "manifest_version": 3,
+    "name": "VISION - Student Extension",
+    "version": "1.0.0",
+    "description": "VISION Classroom Management System - Student Module",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting",
+        "desktopCapture",
+        "tabs"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "css": ["styles.css"],
+        "js": ["content.js"]
+    }],
+    "action": {
+        "default_icon": "icon.png",
+        "default_title": "VISION Student"
+    },
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
     }
-  ]
 }
